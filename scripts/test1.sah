@@ -1,0 +1,48 @@
+function testTrim() {
+	_navigateTo("http://sahitest.com/demo/");
+	_click(_link("TakePageScreenshot Test"));
+	_focusWindow();
+	_takePageScreenShot(_table("elInsideScrolledEl"),"../../TrimT.jpg", false,{trim:true,mode:2});
+	_assertSnapShot("../../TrimT.jpg",_table("elInsideScrolledEl"), 20, true, {trim:true,mode:2});
+	_takePageScreenShot(_table("elInsideScrolledEl"),"../../TrimF.jpg", false,{trim:false,mode:2});
+	_assertSnapShot("../../TrimF.jpg",_table("elInsideScrolledEl"), 20, true, {trim:false,mode:2});
+}
+
+function testSnapshot(){
+	_navigateTo("http://sahitest.com/demo/");
+	_click(_link("TakePageScreenshot Test"));
+	_focusWindow();
+	_takePageScreenShot(_table("elInsideScrolledEl"),"../../TrimT1.jpg", false,{resizePercentage:75,mode:2});
+	_assertSnapShot("../../TrimT1.jpg",_table("elInsideScrolledEl"), 20, true, {resizePercentage:75,mode:2});
+	_navigateTo("https://gromo.github.io/jquery.scrollbar/demo/basic.html");
+	_focusWindow();
+	_takePageScreenShot(_textbox(1),"../../TrimT2.jpg", false,{trim:true,mode:2});
+	_assertSnapShot("../../TrimT2.jpg",_textbox(1) , 20, true,{trim:true,mode:2});
+	_takePageScreenShot(_textbox(1),"../../TrimT2.jpg", false,{trim:false,mode:2});
+	_assertSnapShot("../../TrimT2.jpg",_textbox(1) , 20, true,{trim:false,mode:2});
+}
+
+function testPageMode() {
+    _navigateTo("http://sahitest.com/demo/");
+	_click(_link("TakePageScreenshot Test"));
+	_focusWindow();
+	_takePageScreenShot(_table(0));
+	_takePageScreenShot(_table("elInsideScrolledEl"),"../../Page1.jpg", false);
+	_takePageScreenShot(_table("elInsideScrolledEl"),"../../Page2.jpg", false,{trim:false, format:'jpg',resizePercentage:75,mode:2});
+    _takePageScreenShot(_table(0), "../../Page4.png", false,{mode:1});
+	_assertSnapShot("../../Page4.png",_table(0), 20, true, {mode:1});
+	_takePageScreenShot(_table("elInsideScrolledEl"), "../../Page5.png", false, {mode:2});
+	_assertSnapShot("../../Page5.png",_table("elInsideScrolledEl") , 20, true, {mode:2});
+}
+
+function test1() {
+_navigateTo("https://gromo.github.io/jquery.scrollbar/demo/basic.html");
+_focusWindow();
+_windowAction("resize",500,800);
+_takePageScreenShot(_textbox(0),"../../Test1.jpg", false,{delay:150,mode:2});
+_takePageScreenShot(_textbox(1),"../../Test2.jpg", false,{delay:150,mode:2});
+_windowAction("maximize");
+_takePageScreenShot(_textbox(0),"../../Test1_again.jpg", false,{delay:150,mode:2});
+_takePageScreenShot(_textbox(1),"../../Test2_again.jpg", false,{delay:150,mode:2});
+}
+_runUnitTests();
