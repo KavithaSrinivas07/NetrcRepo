@@ -1,0 +1,5 @@
+_navigateTo("https://www.w3schools.com/howto/howto_css_menu_horizontal_scroll.asp");
+_focusWindow();
+_windowAction("maximize");
+_wait(2000);
+_takePageScreenShot(_link("Work", _near(_link("Blog"))),"test11.png",false,{mode:2});
